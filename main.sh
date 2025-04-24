@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # GitHub token (for educational purposes only)
-GITHUB_TOKEN="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"
+GITHUB_TOKEN="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"
 
 # Function to make GitHub API request
 make_github_request() {
