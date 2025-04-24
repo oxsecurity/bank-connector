@@ -1,34 +1,28 @@
 #!/bin/bash
 
-# GitHub token (for educational purposes only)
-GITHUB_TOKEN="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"
+# JWT token (for educational purposes only)
+JWT_TOKEN="eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6Ik9YIiwiZXhwIjoxNzc3MDMxNjUzLCJpYXQiOjE3NDU0OTU2NTN9.MyDNCUpKOSF2eUql3VvsPhmLjLWX8QHOaqvncKv4UrU"
 
-# Function to make GitHub API request
-make_github_request() {
+# Function to decode JWT token
+decode_jwt() {
     local token="$1"
-    local endpoint="$2"
-    curl -s -H "Authorization: token $token" \
-         -H "Accept: application/vnd.github.v3+json" \
-         "https://api.github.com$endpoint"
+    # Split the token into parts
+    IFS='.' read -r -a parts <<< "$token"
+    
+    # Decode the payload (second part)
+    echo "${parts[1]}" | base64 -d 2>/dev/null
 }
 
 # Main function
 main() {
-    echo "=== GitHub API Demo ==="
+    echo "=== JWT Token Demo ==="
     echo
     
-    # Test the token with a simple GitHub API request
-    echo "Making API request to get authenticated user info..."
-    response=$(make_github_request "$GITHUB_TOKEN" "/user")
+    echo "JWT Token: $JWT_TOKEN"
+    echo
     
-    if [ $? -eq 0 ]; then
-        echo "API request successful!"
-        echo "User info:"
-        echo "$response" | jq -r '.login, .name, .email'
-    else
-        echo "API request failed!"
-        exit 1
-    fi
+    echo "Decoded Payload:"
+    decode_jwt "$JWT_TOKEN" | jq .
 }
 
 # Check if jq is installed
