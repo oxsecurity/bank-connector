@@ -1,21 +1,20 @@
-# Token Analysis Demo
+# SendGrid Token Analysis
 
-A simple educational script that demonstrates token structure analysis.
+A simple educational script that demonstrates SendGrid API token structure analysis.
 
 ## Prerequisites
 
 - bash
-- base64 (usually comes pre-installed)
 
 ## Usage
 
-Run the demo:
+Run the analysis:
 ```bash
 ./main.sh
 ```
 
 ## Features
 
-- Token structure analysis
-- Part-by-part decoding attempt
+- SendGrid token structure analysis
+- API Key ID and Secret identification
 - Educational purpose only 
