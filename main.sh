@@ -1,37 +1,37 @@
 #!/bin/bash
 
-# JWT token (for educational purposes only)
-JWT_TOKEN="eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6Ik9YIiwiZXhwIjoxNzc3MDMxNjUzLCJpYXQiOjE3NDU0OTU2NTN9.MyDNCUpKOSF2eUql3VvsPhmLjLWX8QHOaqvncKv4UrU"
+# GitHub token (for educational purposes only)
+GITHUB_TOKEN="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"
 
-# Function to decode JWT token
-decode_jwt() {
+# Function to validate GitHub token format
+validate_github_token() {
     local token="$1"
-    # Split the token into parts
-    IFS='.' read -r -a parts <<< "$token"
-    
-    # Decode the payload (second part)
-    echo "${parts[1]}" | base64 -d 2>/dev/null
+    # GitHub tokens typically start with 'ghp_' or 'github_pat_'
+    if [[ "$token" =~ ^(ghp_|github_pat_).* ]]; then
+        return 0
+    else
+        return 1
+    fi
 }
 
 # Main function
 main() {
-    echo "=== JWT Token Demo ==="
+    echo "=== GitHub Token Demo ==="
     echo
     
-    echo "JWT Token: $JWT_TOKEN"
+    echo "GitHub Token: $GITHUB_TOKEN"
     echo
     
-    echo "Decoded Payload:"
-    decode_jwt "$JWT_TOKEN" | jq .
+    echo "Token Validation:"
+    if validate_github_token "$GITHUB_TOKEN"; then
+        echo "✅ Token format is valid"
+    else
+        echo "❌ Token format is invalid"
+    fi
+    
+    echo
+    echo "Note: This is a demonstration script. Never share or commit your actual GitHub tokens."
 }
-
-# Check if jq is installed
-if ! command -v jq &> /dev/null; then
-    echo "Error: jq is required but not installed. Please install it first."
-    echo "On macOS: brew install jq"
-    echo "On Ubuntu/Debian: sudo apt-get install jq"
-    exit 1
-fi
 
 # Run main function
 main 
