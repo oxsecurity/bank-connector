@@ -1,13 +1,11 @@
-# JWT Token Demo
+# Token Analysis Demo
 
-A simple educational script that demonstrates JWT token decoding.
+A simple educational script that demonstrates token structure analysis.
 
 ## Prerequisites
 
 - bash
-- jq (JSON processor)
-  - Install on macOS: `brew install jq`
-  - Install on Ubuntu/Debian: `sudo apt-get install jq`
+- base64 (usually comes pre-installed)
 
 ## Usage
 
@@ -18,6 +16,6 @@ Run the demo:
 
 ## Features
 
-- JWT token decoding demonstration
-- Payload inspection
+- Token structure analysis
+- Part-by-part decoding attempt
 - Educational purpose only 
